@@ -3,22 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ProjectsModule } from './modules/projects/projects.module';
-import { ProjectsRoutingModule } from './modules/projects/projects-routing.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    ProjectsRoutingModule,
-    AppRoutingModule,
-    ProjectsModule,
+    CoreModule,
+    SharedModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
