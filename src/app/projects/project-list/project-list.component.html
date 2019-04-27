@@ -1,3 +1,31 @@
-<p>
-  project-list works!
-</p>
+<div class="columns is-centered">
+  <div class="column is-half">
+    <p class="title is-size-1"> StreamFirst </p>
+    <p class="subtitle"> Project list</p>
+      <p class="control has-icons-right">
+        <input class="input" type="text" placeholder="search for project name" #input>
+        <span class="icon is-small is-right">
+          <i class="fas fa-search"></i>
+        </span>
+      </p>
+  </div>
+</div>
+
+<div class="columns is-multiline is-tablet">
+  <div class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen" *ngFor="let project of projects">
+    <div class="card">
+      <a [routerLink]="['/project', project.slug]">
+        <div class="card-content">
+          <div class="level">
+            <div class="level-left">
+              <p class="title"> {{project.name}} </p>
+            </div>
+            <div class="level-right has-text-grey">{{project.latestVersion}}</div>
+          </div>
+          <p class="has-text-grey"> {{project.description}} </p>
+          <p class="has-text-grey"> Last update: {{project.lastUpdateUtc.toLocaleString()}} </p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
