@@ -1,5 +1,11 @@
-.card:hover {
-  -webkit-box-shadow: 5px 5px 10px 4px  grey;
-  -moz-box-shadow: 5px 5px 10px 4px  grey;
-  box-shadow: 5px 5px 10px 4px grey;
+.card {
+  min-height: 190px;
+  &:hover {
+    -webkit-box-shadow: 5px 5px 10px 4px grey;
+    -moz-box-shadow: 5px 5px 10px 4px grey;
+    box-shadow: 5px 5px 10px 4px grey;
+  }
+}
+.card-content {
+  padding: 1rem;
 }

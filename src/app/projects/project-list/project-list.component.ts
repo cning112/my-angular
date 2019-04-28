@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../shared/project.model';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-project-list',
@@ -20,6 +22,10 @@ export class ProjectListComponent implements OnInit {
     this.route.data.subscribe((data: {projects: Project[]}) => {
       this.projects = data.projects;
     });
+  }
+
+  fromNow(dt: Date): string {
+    return moment(dt).fromNow();
   }
 
 }
