@@ -2,22 +2,24 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Project } from './project.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsHttpService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  // TODO: get data from server
   getProjects(): Observable<Project[]> {
-    return of([
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()}
-    ]).pipe(delay(1000));
+    const url = 'api/projects';
+    return this.http.get<Project[]>(url);
+  }
+
+  getProject(id: number): Observable<Project> {
+    const url = `api/projects/${id}`;
+    return this.http.get<Project>(url);
   }
 }
