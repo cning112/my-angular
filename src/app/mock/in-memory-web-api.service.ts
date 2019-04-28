@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Project } from 'src/app/projects/shared/project.model';
+import * as faker from 'faker';
+import * as _ from 'lodash';
 
 
 @Injectable({
@@ -11,30 +13,21 @@ export class InMemoryWebApiService implements InMemoryDbService {
 
   constructor() { }
 
+  private fakeProject(): Project {
+    const name = `${faker.company.bsAdjective()} ${faker.company.bsNoun()}`;
+    return {
+      id: faker.random.number(),
+      slug: faker.helpers.slugify(name),
+      name,
+      description: faker.lorem.sentence(),
+      latestVersion: `v${faker.random.number(10)}.${faker.random.number(20)}.${faker.random.number(1000)}`,
+      lastUpdateUtc: faker.date.recent(365)
+    };
+  }
+
   createDb() {
-    const projects: Project[] = [
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 2, slug: 'proj-2', name: 'Project 2', description: 'None', latestVersion: 'v0.1.1', lastUpdateUtc: new Date()},
-      {id: 3, slug: 'proj-3', name: 'Project 3', description: 'None', latestVersion: 'v0.2.1', lastUpdateUtc: new Date()},
-      {id: 4, slug: 'proj-4', name: 'Project 4', description: 'None', latestVersion: 'v0.3.1', lastUpdateUtc: new Date()},
-      {id: 5, slug: 'proj-5', name: 'Project 5', description: 'None', latestVersion: 'v0.4.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 2, slug: 'proj-2', name: 'Project 2', description: 'None', latestVersion: 'v0.1.1', lastUpdateUtc: new Date()},
-      {id: 3, slug: 'proj-3', name: 'Project 3', description: 'None', latestVersion: 'v0.2.1', lastUpdateUtc: new Date()},
-      {id: 4, slug: 'proj-4', name: 'Project 4', description: 'None', latestVersion: 'v0.3.1', lastUpdateUtc: new Date()},
-      {id: 5, slug: 'proj-5', name: 'Project 5', description: 'None', latestVersion: 'v0.4.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 2, slug: 'proj-2', name: 'Project 2', description: 'None', latestVersion: 'v0.1.1', lastUpdateUtc: new Date()},
-      {id: 3, slug: 'proj-3', name: 'Project 3', description: 'None', latestVersion: 'v0.2.1', lastUpdateUtc: new Date()},
-      {id: 4, slug: 'proj-4', name: 'Project 4', description: 'None', latestVersion: 'v0.3.1', lastUpdateUtc: new Date()},
-      {id: 5, slug: 'proj-5', name: 'Project 5', description: 'None', latestVersion: 'v0.4.1', lastUpdateUtc: new Date()},
-      {id: 1, slug: 'proj-1', name: 'Project 1', description: 'None', latestVersion: 'v0.0.1', lastUpdateUtc: new Date()},
-      {id: 2, slug: 'proj-2', name: 'Project 2', description: 'None', latestVersion: 'v0.1.1', lastUpdateUtc: new Date()},
-      {id: 3, slug: 'proj-3', name: 'Project 3', description: 'None', latestVersion: 'v0.2.1', lastUpdateUtc: new Date()},
-      {id: 4, slug: 'proj-4', name: 'Project 4', description: 'None', latestVersion: 'v0.3.1', lastUpdateUtc: new Date()},
-      {id: 5, slug: 'proj-5', name: 'Project 5', description: 'None', latestVersion: 'v0.4.1', lastUpdateUtc: new Date()},
-    ];
-    console.log('pass thru');
+    console.log(faker.company.bs(), faker.company.bsAdjective(), faker.company.bsBuzz(), faker.company.bsNoun())
+    const projects: Project[] = _.range(14).map(i => this.fakeProject());
     return {projects};
   }
 }
