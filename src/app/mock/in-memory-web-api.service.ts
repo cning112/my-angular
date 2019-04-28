@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Project } from 'src/app/projects/shared/project.model';
+import { ProjectMeta } from 'src/app/projects/shared/project.model';
 import * as faker from 'faker';
 import * as _ from 'lodash';
 
@@ -13,7 +13,7 @@ export class InMemoryWebApiService implements InMemoryDbService {
 
   constructor() { }
 
-  private fakeProject(): Project {
+  private fakeProject(): ProjectMeta {
     const name = `${faker.company.bsAdjective()} ${faker.company.bsNoun()}`;
     return {
       id: faker.random.number(),
@@ -27,7 +27,7 @@ export class InMemoryWebApiService implements InMemoryDbService {
 
   createDb() {
     console.log(faker.company.bs(), faker.company.bsAdjective(), faker.company.bsBuzz(), faker.company.bsNoun())
-    const projects: Project[] = _.range(14).map(i => this.fakeProject());
+    const projects: ProjectMeta[] = _.range(14).map(i => this.fakeProject());
     return {projects};
   }
 }

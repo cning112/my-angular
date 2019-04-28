@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Project } from './project.model';
+import { ProjectMeta } from './project.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -13,13 +13,13 @@ export class ProjectsHttpService {
     private http: HttpClient
   ) { }
 
-  getProjects(): Observable<Project[]> {
+  getProjects(): Observable<ProjectMeta[]> {
     const url = 'api/projects';
-    return this.http.get<Project[]>(url);
+    return this.http.get<ProjectMeta[]>(url);
   }
 
-  getProject(id: number): Observable<Project> {
+  getProject(id: number): Observable<ProjectMeta> {
     const url = `api/projects/${id}`;
-    return this.http.get<Project>(url);
+    return this.http.get<ProjectMeta>(url);
   }
 }

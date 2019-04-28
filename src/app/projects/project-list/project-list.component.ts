@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from '../shared/project.model';
+import { ProjectMeta } from '../shared/project.model';
 import * as moment from 'moment';
 
 
@@ -11,8 +11,8 @@ import * as moment from 'moment';
 })
 export class ProjectListComponent implements OnInit {
   @ViewChild('input') private searchBox: ElementRef;
-  private allProjects: Project[];
-  private projects: Project[];
+  private allProjects: ProjectMeta[];
+  private projects: ProjectMeta[];
   private name: string;
 
   constructor(
@@ -21,7 +21,7 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit() {
     this.searchBox.nativeElement.focus();
-    this.route.data.subscribe((data: {projects: Project[]}) => {
+    this.route.data.subscribe((data: {projects: ProjectMeta[]}) => {
       this.allProjects = data.projects;
       this.projects = this.allProjects;
     });
