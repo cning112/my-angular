@@ -11,7 +11,9 @@ import * as moment from 'moment';
 })
 export class ProjectListComponent implements OnInit {
   @ViewChild('input') private searchBox: ElementRef;
+  private allProjects: Project[];
   private projects: Project[];
+  private name: string;
 
   constructor(
     private route: ActivatedRoute
@@ -20,9 +22,16 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.searchBox.nativeElement.focus();
     this.route.data.subscribe((data: {projects: Project[]}) => {
-      this.projects = data.projects;
+      this.allProjects = data.projects;
+      this.projects = this.allProjects;
     });
   }
+
+  filterProjects(): void {
+    const lower = this.name.toLowerCase();
+    this.projects = this.allProjects.filter(p => p.name.toLowerCase().includes(lower));
+  }
+
 
   fromNow(dt: Date): string {
     return moment(dt).fromNow();

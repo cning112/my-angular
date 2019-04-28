@@ -3,7 +3,7 @@
     <p class="title is-size-1"> StreamFirst </p>
     <p class="subtitle"> Project list</p>
       <p class="control has-icons-right">
-        <input class="input" type="text" placeholder="search for project name" #input>
+        <input class="input" type="text" placeholder="search for project name" #input [(ngModel)]="name" (ngModelChange)="filterProjects()">
         <span class="icon is-small is-right">
           <i class="fas fa-search"></i>
         </span>
